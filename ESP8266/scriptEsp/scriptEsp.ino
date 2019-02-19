@@ -12,6 +12,7 @@ DHTesp dht;
 const char* ssid = "lyncoln";
 const char* password = "1012141618";
 
+IPAddress ip(192,168,1,100);
 ESP8266WebServer server(80);
 
 const int led = 2;
@@ -24,6 +25,9 @@ void handleRoot() {
   digitalWrite(led, 1);
   
   int temperatura = dht.getTemperature();
+  if(temperatura > 99){
+    temperatura = NULL;
+  }
   String textoHTML;
 
   textoHTML = "Ola!! Aqui &eacute; o <b>ESP8266</b> falando! ";
