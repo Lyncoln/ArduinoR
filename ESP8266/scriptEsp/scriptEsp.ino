@@ -12,7 +12,7 @@ DHTesp dht;
 const char* ssid = "lyncoln";
 const char* password = "1012141618";
 
-IPAddress ip(192,168,1,100);
+IPAddress ip(192,168,0,100);
 ESP8266WebServer server(80);
 
 const int led = 2;
