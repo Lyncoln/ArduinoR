@@ -43,7 +43,7 @@ void setup() {
   Serial.println(WiFi.localIP());
   server.begin();
 }
-
+int cont = 0;
 void loop(){
     int temperatura = dht.getTemperature();
     int humidade = dht.getHumidity();  
@@ -51,9 +51,11 @@ void loop(){
     client.println("<!DOCTYPE html>\n<html>\n<head>\n<style>\nh1.centro{\ntext-align:center;\n\n}\np.quadrado {\n  border: 1px solid powderblue;\n  padding: 30px;\n background-color: white; \n}\n</style>\n</head>\n<body bgcolor = \"   #4169e1\">\n\n<font face=\"Arial\"><h1 class =\"centro\">\nProjeto SMART EAGLE\n</h1></font>\n\n<p>\n<b><font size=\"5\" face=\"Times\">\nSensores trabalhando: \n</font>\n</b></p>\n\n<p class = quadrado id = \"temperatura\">\nTemperatura: ");
     client.println(temperatura);
     client.println("\n</p>\n<p class = quadrado id = \"humidade\">\nHumidade: ");
-    client.println(humidade);
+    client.println(humidade); 
     client.println("\n</p>\n\n</body>\n</html>\n\n\n"); 
-    delay(2000);   
+    
+    
+    delay(2000);  
 }
   
   

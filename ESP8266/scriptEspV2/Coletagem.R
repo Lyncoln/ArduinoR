@@ -5,13 +5,33 @@ library(lubridate)
 caminhoTemp = "//*[@id='temperatura']"
 
 extrair = function(caminho){
-  pagina =  read_html("http://192.168.1.106/")
+  pagina =  read_html("http://192.168.1.105/")
   dados = pagina %>% 
     html_node(xpath = caminho) %>% 
     html_text() %>% 
     str_extract("\\d+")
   return(dados)
 }
+
+
+
+
+setwd("F://GitHub//Sensores-Arduino//ESP8266//scriptEspV2")
+cont = 0 
+while(T){
+  data = as.character(now())
+  valor = extrair(caminhoTemp)
+  cat(paste(data," ; "),file="dados.txt",append = TRUE)
+  cat(valor,file="dados.txt", sep = "\n",append=TRUE)
+  cont = cont+1
+  print(cont)
+  Sys.sleep(3)
+}
+
+
+BD = tibble()
+BD = BD %>% 
+  mutate(horario = NA, dados = NA)
 extracao = function(caminho,bancoDados){
   while(T){
     data = as.character(now())
@@ -24,14 +44,6 @@ extracao = function(caminho,bancoDados){
   }
   
 }
-
-
-
-
-BD = tibble()
-BD = BD %>% 
-  mutate(horario = NA, dados = NA)
-
 while(T){
   data = as.character(now())
   valor = extrair(caminhoTemp)
@@ -40,15 +52,3 @@ while(T){
   print("Peguei")
   Sys.sleep(60)
 }
-
-setwd("F://GitHub//Sensores-Arduino//ESP8266//scriptEsp")
-while(T){
-  data = as.character(now())
-  valor = extrair(caminhoTemp)
-  cat(paste(data," ; "),file="outfile.txt",append = TRUE)
-  cat(valor,file="outfile.txt", sep = "\n",append=TRUE)
-  print("Peguei")
-  Sys.sleep(2)
-}
-
-
